@@ -2,6 +2,7 @@ import { Schema, model } from 'mongoose';
 
 const tradeSchema = new Schema({
     buy: {
+        // Exchange madhe kay ghenar te
         type: Schema.Types.ObjectId,
         ref: 'Product',
     },
@@ -10,6 +11,7 @@ const tradeSchema = new Schema({
         ref: 'User',
     },
     sell: {
+        // Kay ghaycha ahe
         type: Schema.Types.ObjectId,
         ref: 'Product',
     },

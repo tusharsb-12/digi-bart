@@ -14,3 +14,8 @@ export const myOffers = async () => {
     const data = await API.get('/trade/my-offers');
     return data.data;
 };
+
+export const getBarterOffers = async (id) => {
+    const data = await API.get(`/trade/barter-offer/${id}`);
+    return data.data;
+};

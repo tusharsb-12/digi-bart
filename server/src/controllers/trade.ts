@@ -101,7 +101,7 @@ export const acceptTrade = async (req: Request, res: Response) => {
     }
 };
 
-// Accept trade
+// Reject trade
 export const rejectTrade = async (req: Request, res: Response) => {
     try {
         const tradeId = req.params.tradeId;
@@ -116,6 +116,25 @@ export const rejectTrade = async (req: Request, res: Response) => {
         return res.status(200).json({
             status: ResponseStatus.SUCCESS,
             message: 'Trade rejected',
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            status: ResponseStatus.FAIL,
+            errors: ['Internal server error'],
+        });
+    }
+};
+
+// Barter offers for a product
+export const barterOffer = async (req: Request, res: Response) => {
+    try {
+        const id = req.params.id;
+        const trades = await Trade.find({ buy: id }).populate('sell');
+        return res.status(200).json({
+            status: ResponseStatus.SUCCESS,
+            message: 'Trades fetch',
+            trades,
         });
     } catch (error) {
         console.log(error);

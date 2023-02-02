@@ -1,3 +1,4 @@
+import axios from 'axios';
 import API from '.';
 
 export const getProducts = async () => {
