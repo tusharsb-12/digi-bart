@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import UserLayout from '../../components/user/UserLayout'
-import ProductCard from '../../components/product/ProductCard'
+import ProductCard from '../../components/product/ProductCard2'
 import { getProducts } from '../../api/product'
 import { getUserData } from '../../api/user'
 

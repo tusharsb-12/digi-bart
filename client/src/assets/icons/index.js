@@ -27,18 +27,26 @@ import { ReactComponent as OutlinePersonIcon } from './outlinePerson.svg'
 import { ReactComponent as OutlineCogIcon } from './outlineCog.svg'
 import { ReactComponent as OutlineLogoutIcon } from './outlineLogout.svg'
 import { ReactComponent as GoogleIcon } from './google.svg'
-import { ReactComponent as SettingIcon } from './settings_black_24dp.svg'
-import { ReactComponent as OfferIcon } from './local_offer_black_24dp.svg'
-import { ReactComponent as InventoryIcon } from './inventory_2_black_24dp.svg'
-import { ReactComponent as AccountIcon } from './account_circle_black_24dp.svg'
+import { ReactComponent as SettingBlackIcon } from './settings_black.svg'
+import { ReactComponent as SettingWhiteIcon } from './settings_white.svg'
+import { ReactComponent as OfferBlackIcon } from './offer_black.svg'
+import { ReactComponent as OfferWhiteIcon } from './offer_white.svg'
+import { ReactComponent as InventoryBlackIcon } from './inventory_2_black.svg'
+import { ReactComponent as InventoryWhiteIcon } from './inventory_2_white.svg'
+import { ReactComponent as AccountBlackIcon } from './account_black.svg'
+import { ReactComponent as AccountWhiteIcon } from './account_white.svg'
 import { ReactComponent as DownArrowIcon } from './external_link.svg'
 
 export {
     DownArrowIcon,
-    SettingIcon,
-    OfferIcon,
-    InventoryIcon,
-    AccountIcon,
+    SettingBlackIcon,
+    SettingWhiteIcon,
+    OfferBlackIcon,
+    OfferWhiteIcon,
+    InventoryBlackIcon,
+    InventoryWhiteIcon,
+    AccountBlackIcon,
+    AccountWhiteIcon,
     ButtonsIcon,
     CardsIcon,
     ChartsIcon,

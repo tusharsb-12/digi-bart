@@ -15,7 +15,7 @@ const UserLayout = ({ children }) => {
                         <UserSideBar />
                     </div>
                     <div className='w-4/5'>
-                        <div className='bg-purple-600 text-white mx-2 my-4 p-6 rounded-lg h-[90%] overflow-y-auto' >
+                        <div className='bg-white text-black mx-2 my-4 p-6 rounded-lg h-[90%] overflow-y-auto' >
                             <Scrollbars>
                                 {children}
                             </Scrollbars>
