@@ -5,7 +5,6 @@ import {
     MoonIcon,
     SunIcon,
     BellIcon,
-    MenuIcon,
     OutlinePersonIcon,
     OutlineCogIcon,
     OutlineLogoutIcon,

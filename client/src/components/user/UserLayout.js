@@ -2,6 +2,7 @@ import React from 'react'
 import Layout from '../Layout'
 import UserSideBar from './UserSideBar'
 // import { UserSidebarProvider } from '../context/UserSideBarContext'
+import { Scrollbars } from 'react-custom-scrollbars'
 
 const UserLayout = ({ children }) => {
     return (
@@ -14,9 +15,11 @@ const UserLayout = ({ children }) => {
                         <UserSideBar />
                     </div>
                     <div className='w-4/5'>
-                        <div className='bg-purple-600 text-white mx-2 my-4 p-2 rounded-lg min-h-[95%] overflow-y-auto' >
-                            {children}
-                        </div>
+                        <Scrollbars>
+                            <div className='bg-purple-600 text-white mx-2 my-4 p-2 rounded-lg h-[90%] overflow-y-auto' >
+                                {children}
+                            </div>
+                        </Scrollbars>
                     </div>
                 </div>
             </Layout>
