@@ -54,13 +54,13 @@ function CreateAccount() {
                     </div>
                     <main className="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
                         <div className="w-full">
-                            <h1 className="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
+                            <h1 className="mb-4 text-3xl font-semibold text-gray-700 dark:text-gray-200">
                                 Create account
                             </h1>
                             <Label>
                                 <span>First Name</span>
                                 <Input
-                                    className="mt-1"
+                                    className="mt-1 p-2"
                                     type="text"
                                     placeholder="john"
                                     name="firstName"
@@ -68,10 +68,10 @@ function CreateAccount() {
                                     value={accDetails.firstName}
                                 />
                             </Label>
-                            <Label>
+                            <Label className="mt-4">
                                 <span>Last Name</span>
                                 <Input
-                                    className="mt-1"
+                                    className="mt-1 p-2"
                                     type="text"
                                     placeholder="doe"
                                     name="lastName"
@@ -79,10 +79,10 @@ function CreateAccount() {
                                     value={accDetails.lastName}
                                 />
                             </Label>
-                            <Label>
+                            <Label className="mt-4">
                                 <span>Email</span>
                                 <Input
-                                    className="mt-1"
+                                    className="mt-1 p-2"
                                     type="email"
                                     placeholder="john@doe.com"
                                     name="email"
@@ -94,9 +94,8 @@ function CreateAccount() {
                             <Label className="mt-4">
                                 <span>Password</span>
                                 <Input
-                                    className="mt-1"
+                                    className="mt-1 p-2"
                                     type="password"
-                                    placeholder="***************"
                                     name="password"
                                     onChange={onChangeAccDetails}
                                     value={accDetails.password}
@@ -105,8 +104,7 @@ function CreateAccount() {
                             <Label className="mt-4">
                                 <span>Confirm password</span>
                                 <Input
-                                    className="mt-1"
-                                    placeholder="***************"
+                                    className="mt-1 p-2"
                                     type="password"
                                     name="confirmPassword"
                                     onChange={onChangeAccDetails}

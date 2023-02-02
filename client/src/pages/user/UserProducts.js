@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import UserLayout from '../../components/user/UserLayout'
-import ProductCard from '../../components/product/ProductCard2'
+import React, { useEffect, useState } from 'react';
+import UserLayout from '../../components/user/UserLayout';
+import ProductCard from '../../components/product/ProductCard2';
 import { getProducts, getUserProducts } from '../../api/product';
-import { getUserData } from '../../api/user'
-
+import { getUserData } from '../../api/user';
 
 const UserProducts = () => {
     const [products, setProducts] = useState([]);
@@ -43,7 +42,7 @@ const UserProducts = () => {
     return (
         <UserLayout>
             <div>
-                <h1>UserProducts</h1>
+                <h1 className="text-5xl">My Products</h1>
                 <div className="grid grid-cols-3 gap-6">
                     {products.map((product, idx) => {
                         return (
