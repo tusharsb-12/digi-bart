@@ -9,3 +9,8 @@ export const getUserProducts = async () => {
     const data = await API.get('/user/my-products');
     return data.data;
 };
+
+export const postProduct = async (data) => {
+    const res = await API.post('/product/post', data);
+    return res.data;
+};

@@ -51,13 +51,13 @@ function Login() {
                     </div>
                     <main className="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
                         <div className="w-full">
-                            <h1 className="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
+                            <h1 className="text-3xl mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
                                 Login
                             </h1>
                             <Label>
                                 <span>Email</span>
                                 <Input
-                                    className="mt-1"
+                                    className="mt-1 p-2"
                                     type="email"
                                     placeholder="john@doe.com"
                                     name="email"
@@ -69,9 +69,9 @@ function Login() {
                             <Label className="mt-4">
                                 <span>Password</span>
                                 <Input
-                                    className="mt-1"
+                                    className="mt-1 p-2"
                                     type="password"
-                                    placeholder="***************"
+                                    placeholder=""
                                     name="password"
                                     onChange={onChangeAccDetails}
                                     value={accDetails.password}
