@@ -21,6 +21,7 @@
     "dependencies": {
         "dotenv": "^16.0.3",
         "express": "^4.18.2",
+        "geocoder-arcgis": "^2.0.5",
         "mongoose": "^6.9.0"
     }
 }

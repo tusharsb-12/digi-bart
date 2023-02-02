@@ -4,6 +4,7 @@ import { User } from '../models';
 import { sign } from 'jsonwebtoken';
 import { JWT_SECRET } from '../config/constants';
 import { ResponseStatus } from '../enum';
+import { geocoder } from '../utils';
 
 // Register user
 export const createUser = async (req: Request, res: Response) => {
@@ -86,7 +87,17 @@ export const updateUser = async (req: Request, res: Response) => {
         // @ts-ignore
         const id = req.user.id;
         console.log(id);
-        await User.findByIdAndUpdate(id, input);
+        const result = await geocoder.findAddressCandidates(input.address);
+        const loc = result.candidates[0].location;
+        console.log(loc);
+
+        await User.findByIdAndUpdate(id, {
+            ...input,
+            location: {
+                type: 'Point',
+                coordinates: [loc.x, loc.y],
+            },
+        });
 
         return res.status(200).json({
             status: ResponseStatus.SUCCESS,
