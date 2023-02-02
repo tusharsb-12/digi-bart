@@ -1,9 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import UserLayout from '../../components/user/UserLayout'
 import ProductTable from '../../components/util/ProductTable'
 import { Scrollbars } from 'react-custom-scrollbars';
+import { getUserData } from '../../axios/user'
 
 const UserProfile = () => {
+    const [userData, setUserData] = useState({
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                0,
+                0
+            ]
+        },
+        "_id": "",
+        "firstName": "",
+        "lastName": "",
+        "email": "",
+        "contactNumber": "",
+        "address": "",
+        "rating": 0,
+    })
+    useEffect(() => {
+        (async () => {
+            const data = await getUserData()
+        })()
+        setUserData()
+    }, [])
     return (
         <UserLayout>
             <Scrollbars>
@@ -34,24 +57,24 @@ const UserProfile = () => {
                         </div>
                     </div>
                     {/* <Scrollbars > */}
-                        <div className='m-2'>
-                            <div>
-                                <ProductTable title={"Offers for my Products"}
-                                    tableCols={["My Product", "In Exchange of"]}
-                                    enableActions={false}
-                                    demoView={true}
-                                    redirectLink={"/user/product"}
-                                />
-                            </div>
-                            <div>
-                                <ProductTable title={"My Offers"}
-                                    tableCols={["In Exchange of", "My Product"]}
-                                    enableActions={false}
-                                    demoView={true}
-                                    redirectLink={"/user/offer"}
-                                />
-                            </div>
+                    <div className='m-2'>
+                        <div>
+                            <ProductTable title={"Offers for my Products"}
+                                tableCols={["My Product", "In Exchange of"]}
+                                enableActions={false}
+                                demoView={true}
+                                redirectLink={"/user/product"}
+                            />
                         </div>
+                        <div>
+                            <ProductTable title={"My Offers"}
+                                tableCols={["In Exchange of", "My Product"]}
+                                enableActions={false}
+                                demoView={true}
+                                redirectLink={"/user/offer"}
+                            />
+                        </div>
+                    </div>
                     {/* </Scrollbars> */}
                 </div>
             </Scrollbars>
