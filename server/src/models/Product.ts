@@ -43,6 +43,19 @@ const productSchema = new Schema({
         type: Boolean,
         default: false,
     },
+    location: {
+        type: {
+            type: String,
+            enum: 'Point',
+            required: true,
+            default: 'Point',
+        },
+        coordinates: {
+            type: [Number],
+            required: true,
+            default: [0, 0],
+        },
+    },
 });
 
 const Product = model('Product', productSchema);
