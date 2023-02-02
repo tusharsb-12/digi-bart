@@ -5,11 +5,12 @@ import {
     postProduct,
 } from '../controllers/product';
 import { upload } from '../utils';
+import authenticate from '../middleware/auth';
 
 const router = Router();
 
 router.get('/all', getAllProducts);
-router.post('/post', upload.array('images', 10), postProduct);
+router.post('/post', authenticate, upload.array('images', 10), postProduct);
 router.get('/filter', filterProducts);
 
 export default router;
