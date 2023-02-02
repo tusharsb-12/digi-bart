@@ -93,7 +93,7 @@ export default function Product() {
             // console.log(data.products);
             setProducts(data.products)
         })()
-    }, [])
+    }, [userData])
 
     return (
         <Layout>
