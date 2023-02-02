@@ -1,6 +1,9 @@
+import cors from 'cors';
 import dotenv from 'dotenv';
-import express from 'express';
-import { PORT } from './config/constants';
+import express, { json, urlencoded } from 'express';
+import { DB_URI, PORT } from './config/constants';
+import { connect, set } from 'mongoose';
+import { userRoutes } from './api';
 
 dotenv.config();
 
@@ -8,9 +11,16 @@ const main = async () => {
     try {
         const app = express();
 
-        app.use('/', (req, res) => {
-            return res.send('Hello');
-        });
+        // Database connection
+        connect(DB_URI!);
+        set('strictQuery', true);
+
+        app.use(cors());
+        app.use(json());
+        app.use(urlencoded({ extended: true }));
+
+        // Routes
+        app.use('/api/user', userRoutes);
 
         app.listen(PORT, () => {
             console.log(`Listening to port: ${PORT}`);
