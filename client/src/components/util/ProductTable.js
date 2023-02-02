@@ -60,8 +60,8 @@ const ProductTable = ({
                 <Table>
                     <TableHeader>
                         <tr>
-                            {tableCols.map(col => {
-                                return <TableCell>{col}</TableCell>
+                            {tableCols.map((col, idx) => {
+                                return <TableCell key={idx}>{col}</TableCell>
                             })}
                             {enableActions && <TableCell>Actions</TableCell>}
                         </tr>

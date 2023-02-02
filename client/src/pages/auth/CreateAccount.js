@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { registerUser } from '../../axios/index.js';
+import { registerUser } from '../../axios/user';
 
 import ImageLight from '../../assets/img/create-account-office.jpeg';
 import ImageDark from '../../assets/img/create-account-office-dark.jpeg';
