@@ -1,3 +1,5 @@
+import Modal from '../components/Feedback';
+
 const Home = () => {
     return (
         <section className="bg-white dark:bg-gray-900 h-screen">
