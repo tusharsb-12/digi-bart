@@ -82,9 +82,23 @@ export const getAllProducts = async (_req: Request, res: Response) => {
 };
 
 // Location based filtering of products
-export const locationBasedProducts = async (_req: Request, res: Response) => {
+export const locationBasedProducts = async (req: Request, res: Response) => {
     try {
-        const products = await Product.find({});
+        // @ts-ignore
+        const user = await User.findById(req.user.id);
+        const products = await Product.find({
+            location: {
+                $geoWithin: {
+                    // @ts-ignore
+                    $centerSphere: [user?.location.coordinates, 10 / 3963.2],
+                },
+            },
+        });
+        return res.status(200).json({
+            status: ResponseStatus.SUCCESS,
+            message: 'Products fetched',
+            products,
+        });
     } catch (error) {
         console.log(error);
         return res.status(500).json({
