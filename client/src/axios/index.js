@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-    baseURL: 'https://adc0-103-246-224-166.in.ngrok.io/api',
+    baseURL: 'https://3a3d-103-246-224-166.in.ngrok.io/api',
 });
 
 API.interceptors.request.use((req) => {
@@ -25,3 +25,8 @@ export const loginUser = async (data) => {
 };
 
 // User data
+export const getUserData = async () => {
+    const result = await API.get('/user/user-details');
+    console.log(result);
+    return result;
+};
