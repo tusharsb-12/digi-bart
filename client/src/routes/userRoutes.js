@@ -6,6 +6,12 @@ const userRoutes = [
         name: 'Profile', // name that appear in Sidebar
     },
     {
+        path: '/user/product/add',
+        icon1: 'PlusBlackIcon',
+        icon2: 'PlusWhiteIcon',
+        name: 'Add Product'
+    },
+    {
         path: '/user/product',
         icon2: 'InventoryBlackIcon',
         icon1: 'InventoryWhiteIcon',

@@ -36,8 +36,12 @@ import { ReactComponent as InventoryWhiteIcon } from './inventory_2_white.svg'
 import { ReactComponent as AccountBlackIcon } from './account_black.svg'
 import { ReactComponent as AccountWhiteIcon } from './account_white.svg'
 import { ReactComponent as DownArrowIcon } from './external_link.svg'
+import { ReactComponent as PlusBlackIcon } from './add_black.svg'
+import { ReactComponent as PlusWhiteIcon } from './add_white.svg'
 
 export {
+    PlusBlackIcon,
+    PlusWhiteIcon,
     DownArrowIcon,
     SettingBlackIcon,
     SettingWhiteIcon,
