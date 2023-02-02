@@ -1,3 +1,5 @@
+import API from './index';
+
 export const createTrades = async () => {
     const data = await API.get('/trade/create-trade');
     return data.data;
