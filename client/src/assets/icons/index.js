@@ -31,8 +31,10 @@ import { ReactComponent as SettingIcon } from './settings_black_24dp.svg'
 import { ReactComponent as OfferIcon } from './local_offer_black_24dp.svg'
 import { ReactComponent as InventoryIcon } from './inventory_2_black_24dp.svg'
 import { ReactComponent as AccountIcon } from './account_circle_black_24dp.svg'
+import { ReactComponent as DownArrowIcon } from './external_link.svg'
 
 export {
+    DownArrowIcon,
     SettingIcon,
     OfferIcon,
     InventoryIcon,

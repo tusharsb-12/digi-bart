@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@windmill/react-ui": "^0.6.0",
     "react": "^18.2.0",
+    "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.8.0",

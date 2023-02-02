@@ -1,4 +1,4 @@
-import React, { useContext, Suspense, useEffect, lazy } from 'react'
+import React, {  Suspense, } from 'react'
 import Header from './Header'
 import Main from './Main'
 import ThemedSuspense from './ThemedSuspense'
