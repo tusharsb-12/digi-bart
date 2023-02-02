@@ -21,6 +21,10 @@ const productSchema = new Schema({
         type: String,
         required: true,
     },
+    postedOn: {
+        type: Date,
+        default: Date.now,
+    },
 });
 
 const Product = model('Product', productSchema);
