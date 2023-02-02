@@ -38,7 +38,7 @@ function Header() {
                             <SearchIcon className="w-4 h-4" aria-hidden="true" />
                         </div>
                         <Input
-                            className="pl-8 text-gray-700"
+                            className="pl-8 h-[2rem] text-gray-700"
                             placeholder="Search for projects"
                             aria-label="Search"
                         />
@@ -46,7 +46,7 @@ function Header() {
                 </div>
                 <ul className="flex items-center flex-shrink-0 space-x-6">
                     {/* <!-- Theme toggler --> */}
-                    <li className="flex">
+                    {/* <li className="flex">
                         <button
                             className="rounded-md focus:outline-none focus:shadow-outline-purple"
                             onClick={toggleMode}
@@ -58,7 +58,7 @@ function Header() {
                                 <MoonIcon className="w-5 h-5" aria-hidden="true" />
                             )}
                         </button>
-                    </li>
+                    </li> */}
                     {/* <!-- Notifications menu --> */}
                     <li className="relative">
                         <button

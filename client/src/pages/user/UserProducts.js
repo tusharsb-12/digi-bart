@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import UserLayout from '../../components/user/UserLayout';
-import ProductCard from '../../components/product/ProductCard';
+import React, { useEffect, useState } from 'react'
+import UserLayout from '../../components/user/UserLayout'
+import ProductCard from '../../components/product/ProductCard2'
 import { getProducts, getUserProducts } from '../../api/product';
-import { getUserData } from '../../api/user';
+import { getUserData } from '../../api/user'
+
 
 const UserProducts = () => {
     const [products, setProducts] = useState([]);
