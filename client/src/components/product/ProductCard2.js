@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ProductCard2 = ({ product, user }) => {
+const ProductCard2 = ({ product, user, edit_flag = true }) => {
     const { _id, name, description, images, value, category, postedOn, bougtOn, owner, condition, shippingAvailablity, upForTrade, location } = product;
     return (
         <div key={_id} className="group relative drop-shadow-xl">
@@ -14,8 +14,8 @@ const ProductCard2 = ({ product, user }) => {
             <div className="mt-4 flex justify-between">
                 <div>
                     <h3 className="text-sm text-gray-700">
-                            <span aria-hidden="true" className="absolute inset-0" />
-                            {name}
+                        <span aria-hidden="true" className="absolute inset-0" />
+                        {name}
                     </h3>
                     <p className="mt-1 text-sm text-gray-500">{description.slice(0, Math.min(description.length, 100)) + '...'}</p>
                 </div>
