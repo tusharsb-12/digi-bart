@@ -57,3 +57,24 @@ export const loginUser = async (req: Request, res: Response) => {
         });
     }
 };
+
+// Get user details
+export const userDetails = async (req: Request, res: Response) => {
+    try {
+        // @ts-ignore
+        const id = req.user.id;
+        const user = await User.findById(id);
+
+        return res.status(200).json({
+            status: ResponseStatus.SUCCESS,
+            message: 'User fetched',
+            user,
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            status: ResponseStatus.FAIL,
+            errors: ['Internal server error'],
+        });
+    }
+};

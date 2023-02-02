@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { PostProductDto } from '../dto';
+import { PostProductDto, ProductConditionDto } from '../dto';
 import { Product } from '../models';
 import uploadToCloudinary from '../utils/uploadToCloudinary';
 import { ResponseStatus } from '../enum';
@@ -32,11 +32,13 @@ export const postProduct = async (req: Request, res: Response) => {
     }
 };
 
-// Get all products by category
-export const getCategoryProducts = async (req: Request, res: Response) => {
+// Product filter
+export const filterProducts = async (req: Request, res: Response) => {
     try {
-        const category = req.params.category;
-        const products = await Product.find({ category });
+        const condition: ProductConditionDto = req.body;
+        const products = await Product.find({ ...condition }, [], {
+            sort: { postedOn: -1 },
+        });
         return res.status(200).json({
             status: ResponseStatus.SUCCESS,
             message: 'Products fetched',

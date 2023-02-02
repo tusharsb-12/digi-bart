@@ -25,6 +25,24 @@ const productSchema = new Schema({
         type: Date,
         default: Date.now,
     },
+    boughtOn: {
+        type: Date,
+    },
+    owner: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+    },
+    condition: {
+        type: String,
+    },
+    shippingAvailablity: {
+        type: Boolean,
+        default: false,
+    },
+    upForTrade: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 const Product = model('Product', productSchema);
