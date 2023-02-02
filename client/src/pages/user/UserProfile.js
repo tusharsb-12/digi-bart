@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import UserLayout from '../../components/user/UserLayout'
 import ProductTable from '../../components/util/ProductTable'
 import { Scrollbars } from 'react-custom-scrollbars';
-import { getUserData } from '../../axios/user'
+import { getUserData } from '../../api/user'
 
 const UserProfile = () => {
     const [userData, setUserData] = useState({
@@ -24,8 +24,13 @@ const UserProfile = () => {
     useEffect(() => {
         (async () => {
             const data = await getUserData()
+            setUserData({
+                ...data.data.user,
+                address: '416, Tiranga Society, Yashwant Nagar, Goregaon West'
+            })
+            console.log(data.data.user);
         })()
-        setUserData()
+
     }, [])
     return (
         <UserLayout>
@@ -38,17 +43,17 @@ const UserProfile = () => {
                             </div>
                             <div className='my-auto ml-8 flex-1' >
                                 <div className='flex flex-wrap'>
-                                    <div className='mx-2' >First Name</div>
-                                    <div className='mx-2' >Last Name</div>
+                                    <div className='mx-2' >{userData.firstName}</div>
+                                    <div className='mx-2' >{userData.lastName}</div>
                                 </div>
                                 <div className='m-2'>
-                                    Email
+                                    {userData.email}
                                 </div>
                                 <div className='m-2'>
-                                    Mobile No
+                                    {userData.contactNumber}
                                 </div>
                                 <div className='m-2'>
-                                    Address
+                                    {userData.address}
                                 </div>
                             </div>
                             <div className='aspect-[9/5] w-72 bg-white rounded-lg' >
