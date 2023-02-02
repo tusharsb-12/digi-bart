@@ -26,7 +26,7 @@ function Login() {
         const res = await loginUser(accDetails);
 
         if (res.data.status === 'SUCCESS') {
-            navigate('/home');
+            navigate('/user');
             localStorage.setItem('token', res.data.token);
         }
     };
