@@ -12,6 +12,7 @@ import Product from './pages/product/Product';
 import Products from './pages/product/Products2';
 import AddProduct from './pages/product/AddProduct';
 import Home from './pages/Home';
+import Explore from './pages/Explore';
 
 function App() {
     return (
@@ -28,6 +29,7 @@ function App() {
                 <Route path="/user/setting" element={<UserSettings />} />
                 <Route path='/product/:id' element={<Product />} />
                 <Route path='/products' element={<Products />} />
+                <Route path='/explore' element={<Explore  />} />
             </Routes>
         </Router>
     );
