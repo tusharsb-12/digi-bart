@@ -31,10 +31,3 @@ export const postProduct = async (req: Request, res: Response) => {
         });
     }
 };
-
-Find all products by category
-export const getCategoryProducts = (req: Request, res: Response) => {
-    try {
-        const input: string = req.params.category;
-    } catch (error) {}
-};
