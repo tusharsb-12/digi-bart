@@ -1,22 +1,11 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
-import { Fragment, useState } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/react/20/solid'
 import Layout from '../../components/Layout'
+import ProductCard from '../../components/product/ProductCard2'
+import { getProducts } from '../../api/product'
+import { getUserData } from '../../api/user'
 
 const sortOptions = [
     { name: 'Most Popular', href: '#', current: true },
@@ -26,46 +15,40 @@ const sortOptions = [
     { name: 'Price: High to Low', href: '#', current: false },
 ]
 const subCategories = [
-    { name: 'Totes', href: '#' },
-    { name: 'Backpacks', href: '#' },
-    { name: 'Travel Bags', href: '#' },
-    { name: 'Hip Bags', href: '#' },
-    { name: 'Laptop Sleeves', href: '#' },
+    // { name: 'Totes', href: '#' },
+    // { name: 'Backpacks', href: '#' },
+    // { name: 'Travel Bags', href: '#' },
+    // { name: 'Hip Bags', href: '#' },
+    // { name: 'Laptop Sleeves', href: '#' },
 ]
 const filters = [
     {
-        id: 'color',
-        name: 'Color',
+        id: 'radius',
+        name: 'Radius',
         options: [
-            { value: 'white', label: 'White', checked: false },
-            { value: 'beige', label: 'Beige', checked: false },
-            { value: 'blue', label: 'Blue', checked: true },
-            { value: 'brown', label: 'Brown', checked: false },
-            { value: 'green', label: 'Green', checked: false },
-            { value: 'purple', label: 'Purple', checked: false },
+            { value: '5km', label: '< 5KM', checked: false },
+            { value: '10km', label: '< 10KM', checked: false },
+            { value: '20km', label: '< 20KM', checked: false },
+            { value: '20+km', label: '> 20KM', checked: false },
+        ],
+    },
+    {
+        id: 'shippingAvailablity',
+        name: 'Shipping Availablity',
+        options: [
+            { value: 'available', label: 'Available', checked: false },
+            { value: 'not-available', label: 'Not Available', checked: false },
         ],
     },
     {
         id: 'category',
         name: 'Category',
         options: [
-            { value: 'new-arrivals', label: 'New Arrivals', checked: false },
-            { value: 'sale', label: 'Sale', checked: false },
-            { value: 'travel', label: 'Travel', checked: true },
-            { value: 'organization', label: 'Organization', checked: false },
-            { value: 'accessories', label: 'Accessories', checked: false },
-        ],
-    },
-    {
-        id: 'size',
-        name: 'Size',
-        options: [
-            { value: '2l', label: '2L', checked: false },
-            { value: '6l', label: '6L', checked: false },
-            { value: '12l', label: '12L', checked: false },
-            { value: '18l', label: '18L', checked: false },
-            { value: '20l', label: '20L', checked: false },
-            { value: '40l', label: '40L', checked: true },
+            { value: 'grocery', label: 'Grocery', checked: false },
+            { value: 'mobiles', label: 'Mobiles', checked: false },
+            { value: 'electronics', label: 'Electronics', checked: true },
+            { value: 'two-wheeler', label: 'Two wheeler', checked: false },
+            { value: 'car', label: 'Car', checked: false },
         ],
     },
 ]
@@ -76,6 +59,41 @@ function classNames(...classes) {
 
 export default function Product() {
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+    const [products, setProducts] = useState([])
+    const [userData, setUserData] = useState({
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                0,
+                0
+            ]
+        },
+        "_id": "",
+        "firstName": "",
+        "lastName": "",
+        "email": "",
+        "contactNumber": "",
+        "address": "",
+        "rating": 0,
+    })
+
+    useEffect(() => {
+        (async () => {
+            const data = await getUserData()
+            setUserData({
+                ...data.data.user,
+                address: '416, Tiranga Society, Yashwant Nagar, Goregaon West'
+            })
+            console.log(data.data.user);
+        })()
+    }, [])
+    useEffect(() => {
+        (async () => {
+            const data = await getProducts()
+            // console.log(data.products);
+            setProducts(data.products)
+        })()
+    }, [])
 
     return (
         <Layout>
@@ -307,8 +325,11 @@ export default function Product() {
 
                                 {/* Product grid */}
                                 <div className="lg:col-span-3">
-                                    {/* Replace with your content */}
-                                    <div className="h-96 rounded-lg border-4 border-dashed border-gray-200 lg:h-full" />
+                                    <div className='grid grid-cols-3 gap-6'>
+                                        {products.map((product, idx) => {
+                                            return <ProductCard key={idx} product={product} user={userData} />
+                                        })}
+                                    </div>
                                     {/* /End replace */}
                                 </div>
                             </div>
