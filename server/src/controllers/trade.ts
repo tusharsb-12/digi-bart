@@ -1,13 +1,24 @@
 import { Request, Response } from 'express';
 import { CreateTradeDto } from '../dto';
 import { ResponseStatus } from '../enum';
-import { Trade } from '../models';
+import { Product, Trade } from '../models';
 
 // Create a new trade offer
 export const createTrade = async (req: Request, res: Response) => {
     try {
         const input: CreateTradeDto = req.body;
-        await Trade.create(input);
+        await Product.findByIdAndUpdate(input.sell, {
+            upForTrade: true,
+        });
+
+        const sellP = await Product.findById(input.sell);
+        const buyP = await Product.findById(input.buy);
+
+        await Trade.create({
+            ...input,
+            buyUser: buyP?.owner,
+            sellUser: sellP?.owner,
+        });
         return res.status(201).json({
             status: ResponseStatus.SUCCESS,
             message: 'Trade created',
@@ -26,7 +37,9 @@ export const userTrades = async (req: Request, res: Response) => {
     try {
         // @ts-ignore
         const id = req.user.id;
-        const trades = await Trade.find({ sellUser: id, active: true });
+        const trades = await Trade.find({ sellUser: id, active: true })
+            .populate('sell')
+            .populate('buy');
         return res.status(201).json({
             status: ResponseStatus.SUCCESS,
             message: 'Trades fetched',
@@ -46,7 +59,9 @@ export const userOffers = async (req: Request, res: Response) => {
     try {
         // @ts-ignore
         const id = req.user.id;
-        const trades = await Trade.find({ buyUser: id, active: true });
+        const trades = await Trade.find({ buyUser: id, active: true })
+            .populate('sell')
+            .populate('buy');
         return res.status(201).json({
             status: ResponseStatus.SUCCESS,
             message: 'Trades fetched',
