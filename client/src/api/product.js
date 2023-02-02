@@ -1,5 +1,6 @@
 import API from '.';
 
-const getProducts = async () => {
-    const data = await API.get('/')
+export const getProducts = async () => {
+    const data = await API.get('/product/all')
+    return data.data
 }
