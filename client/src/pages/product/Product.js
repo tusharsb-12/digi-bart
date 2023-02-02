@@ -52,8 +52,6 @@ function classNames(...classes) {
 }
 
 export default function Product() {
-    const [selectedColor, setSelectedColor] = useState(product.colors[0]);
-    const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
     const [result, setProduct] = useState({
         name: '',
         description: '',
@@ -68,7 +66,7 @@ export default function Product() {
         images: [],
     });
     const { id } = useParams();
-    const [open, setOpen] = useState(true)
+    const [open, setOpen] = useState(false)
 
     useEffect(() => {
         (async () => {
