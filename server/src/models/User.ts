@@ -19,12 +19,10 @@ const userSchema = new Schema({
     },
     contactNumber: {
         type: String,
-        required: true,
         default: '',
     },
     address: {
         type: String,
-        required: true,
         default: '',
     },
     location: {

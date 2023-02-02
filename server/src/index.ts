@@ -15,7 +15,7 @@ const main = async () => {
         connect(DB_URI!);
         set('strictQuery', true);
 
-        app.use(cors());
+        app.use(cors({ origin: '*' }));
         app.use(json());
         app.use(urlencoded({ extended: true }));
 

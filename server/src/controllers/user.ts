@@ -78,3 +78,25 @@ export const userDetails = async (req: Request, res: Response) => {
         });
     }
 };
+
+// Update user
+export const updateUser = async (req: Request, res: Response) => {
+    try {
+        const input: UpdateUserDto = req.body;
+        // @ts-ignore
+        const id = req.user.id;
+        console.log(id);
+        await User.findByIdAndUpdate(id, input);
+
+        return res.status(200).json({
+            status: ResponseStatus.SUCCESS,
+            message: 'User updated',
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            status: ResponseStatus.FAIL,
+            errors: ['Internal server error'],
+        });
+    }
+};
