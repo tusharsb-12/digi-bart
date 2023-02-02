@@ -107,3 +107,25 @@ export const locationBasedProducts = async (req: Request, res: Response) => {
         });
     }
 };
+
+// Get all products posted by user
+export const userProducts = async (req: Request, res: Response) => {
+    try {
+        // @ts-ignore
+        const id = req.user.id;
+        const products = await Product.find({
+            owner: id,
+        });
+        return res.status(200).json({
+            status: ResponseStatus.SUCCESS,
+            message: 'Products fetched',
+            products,
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            status: ResponseStatus.FAIL,
+            errors: ['Internal server error'],
+        });
+    }
+};

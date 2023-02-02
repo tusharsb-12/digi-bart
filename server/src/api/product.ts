@@ -12,5 +12,6 @@ const router = Router();
 router.get('/all', getAllProducts);
 router.post('/post', authenticate, upload.array('images', 10), postProduct);
 router.get('/filter', filterProducts);
+router.get('/product/:id', () => {});
 
 export default router;
