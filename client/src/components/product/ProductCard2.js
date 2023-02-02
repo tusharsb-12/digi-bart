@@ -1,10 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const ProductCard2 = ({ product, user, edit_flag = true }) => {
+const ProductCard2 = ({ product, user, edit_flag = true, link_flag = true }) => {
     const { _id, name, description, images, value, category, postedOn, bougtOn, owner, condition, shippingAvailablity, upForTrade, location } = product;
     return (
-        <Link to={`/product/${_id}`}>
+
+        <Link to={link_flag ? `/product/${_id}` : '#'}>
             <div key={_id} className="group relative drop-shadow-xl">
                 <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
                     <img
