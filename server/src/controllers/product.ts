@@ -129,3 +129,22 @@ export const userProducts = async (req: Request, res: Response) => {
         });
     }
 };
+
+// Get product by id
+export const getProductById = async (req: Request, res: Response) => {
+    try {
+        const id = req.params.id;
+        const product = await Product.findById(id).populate('owner');
+        return res.status(200).json({
+            success: ResponseStatus.SUCCESS,
+            message: 'Product fetched',
+            product,
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            status: ResponseStatus.FAIL,
+            errors: ['Internal server error'],
+        });
+    }
+};
