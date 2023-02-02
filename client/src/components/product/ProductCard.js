@@ -1,37 +1,28 @@
 import React from 'react'
+import { EditIcon } from '../../assets/icons';
 
-const ProductCard = ({ title, old_price, newPrice, dollar, exp_date, images, alt }) => {
-    let CardName = `color_bg ${alt}`
-    // let bg_img = `url(${props.images})`
+const ProductCard = ({ product, user }) => {
+    const { _id, name, description, images, value, category, postedOn, bougtOn, owner, condition, shippingAvailablity, upForTrade, location } = product;
+
+    
     return (
-
-        <div className="card">
-            <div className="wrapper">
-                <div className={CardName}></div>
-                <div className="card_img" style={{ "backgroundImage": images[0] }}></div>
-                <div className="heart">
-                    <svg xmlns="<http://www.w3.org/2000/svg>" viewBox="0 0 64 64">
-                        <path d="M47 5c-6.5 0-12.9 4.2-15 10-2.1-5.8-8.5-10-15-10A15 15 0 0 0 2 20c0 13 11 26 30 39 19-13 30-26 30-39A15 15 0 0 0 47 5z">
-                        </path>
-                    </svg>
-                </div>
-                <div className="cardInfo">
-                    <h1>{title}</h1>
-                    <p className="date_">{exp_date}</p>
-                    <div className="action">
-                        <div className="priceGroup">
-                            <p className="price old_price">{dollar}{old_price}</p>
-                            <p className="price newPrice">{dollar}{newPrice}</p>
-                        </div>
-                        <div className="cart">
-                            <svg className="outCart" xmlns="<http://www.w3.org/2000/svg>" viewBox="0 0 64 64">
-                                <path d="M2 6h10l10 40h32l8-24H16"></path>
-                                <circle cx="23" cy="54" r="4"></circle>
-                                <circle cx="49" cy="54" r="4"></circle>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
+        <div className="relative rounded overflow-hidden shadow-lg bg-white text-black text-md">
+            <div>
+                {user && product && user._id == owner && <button className='absolute w-5 h-5 top-2 right-2' >
+                    <EditIcon />
+                </button>}
+                <img className="w-full" src={images && images.length && images[0]} alt="Sunset in the mountains" />
+            </div>
+            <div className="px-3 py-1">
+                <div className="font-bold text-lg mb-0.5 text-purple-500">{name}</div>
+                <p className="text-gray-700 text-sm">
+                    {description.slice(0, Math.min(description.length, 100)) + '...'}
+                </p>
+            </div>
+            <div className="flex flex-wrap px-3 pt-2 pb-2">
+                <button className='ml-auto border border-4 px-2 py-1 rounded-lg border-purple-500 hover:text-white hover:bg-purple-500'>
+                    Details
+                </button>
             </div>
         </div>
     )

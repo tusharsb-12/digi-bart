@@ -5,7 +5,7 @@ import ImageLight from '../../assets/img/login-office.jpeg';
 import ImageDark from '../../assets/img/login-office-dark.jpeg';
 import { GoogleIcon } from '../../assets/icons';
 import { Label, Input, Button } from '@windmill/react-ui';
-import { loginUser } from '../../axios/user';
+import { loginUser } from '../../api/user';
 
 function Login() {
     const [accDetails, setAccDetails] = useState({

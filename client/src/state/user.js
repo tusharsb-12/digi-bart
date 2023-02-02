@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import API from '../axios';
+import API from '../api';
 const initialState = {
     "location": {
         "type": "Point",
