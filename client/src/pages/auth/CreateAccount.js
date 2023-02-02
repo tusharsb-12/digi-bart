@@ -1,31 +1,38 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { registerUser } from '../../axios/index.js';
 
-import ImageLight from '../../assets/img/create-account-office.jpeg'
-import ImageDark from '../../assets/img/create-account-office-dark.jpeg'
-import { GoogleIcon, TwitterIcon } from '../../assets/icons'
-import { Input, Label, Button } from '@windmill/react-ui'
+import ImageLight from '../../assets/img/create-account-office.jpeg';
+import ImageDark from '../../assets/img/create-account-office-dark.jpeg';
+import { GoogleIcon } from '../../assets/icons';
+import { Input, Label, Button } from '@windmill/react-ui';
 
 function CreateAccount() {
-    const [tick, setTick] = useState(true)
+    const [tick, setTick] = useState(true);
     const [accDetails, setAccDetails] = useState({
         firstName: '',
         lastName: '',
         email: '',
         password: '',
-        confirmPassword: ''
-    })
+        confirmPassword: '',
+    });
+    const navigate = useNavigate();
 
     const onChangeAccDetails = (e) => {
         setAccDetails({
             ...accDetails,
-            [e.target.name]: e.target.value
-        })
-    }
+            [e.target.name]: e.target.value,
+        });
+    };
 
-    const register = (e) => {
-        console.log(accDetails);
-    }
+    const register = async (e) => {
+        e.preventDefault();
+        const res = await registerUser(accDetails);
+
+        if (res.data.status === 'SUCCESS') {
+            navigate('/login');
+        }
+    };
 
     return (
         <div className="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
@@ -52,33 +59,75 @@ function CreateAccount() {
                             </h1>
                             <Label>
                                 <span>First Name</span>
-                                <Input className="mt-1" type="text" placeholder="john" name='firstName' onChange={onChangeAccDetails} value={accDetails.firstName} />
+                                <Input
+                                    className="mt-1"
+                                    type="text"
+                                    placeholder="john"
+                                    name="firstName"
+                                    onChange={onChangeAccDetails}
+                                    value={accDetails.firstName}
+                                />
                             </Label>
                             <Label>
                                 <span>Last Name</span>
-                                <Input className="mt-1" type="text" placeholder="doe" name='lastName' onChange={onChangeAccDetails} value={accDetails.lastName} />
+                                <Input
+                                    className="mt-1"
+                                    type="text"
+                                    placeholder="doe"
+                                    name="lastName"
+                                    onChange={onChangeAccDetails}
+                                    value={accDetails.lastName}
+                                />
                             </Label>
                             <Label>
                                 <span>Email</span>
-                                <Input className="mt-1" type="email" placeholder="john@doe.com" name='email' onChange={onChangeAccDetails} value={accDetails.email} />
+                                <Input
+                                    className="mt-1"
+                                    type="email"
+                                    placeholder="john@doe.com"
+                                    name="email"
+                                    onChange={onChangeAccDetails}
+                                    value={accDetails.email}
+                                />
                             </Label>
 
                             <Label className="mt-4">
                                 <span>Password</span>
-                                <Input className="mt-1" type="password" placeholder="***************" name='password' onChange={onChangeAccDetails} value={accDetails.password} />
+                                <Input
+                                    className="mt-1"
+                                    type="password"
+                                    placeholder="***************"
+                                    name="password"
+                                    onChange={onChangeAccDetails}
+                                    value={accDetails.password}
+                                />
                             </Label>
                             <Label className="mt-4">
                                 <span>Confirm password</span>
-                                <Input className="mt-1" placeholder="***************" type="password" name='confirmPassword' onChange={onChangeAccDetails} value={accDetails.confirmPassword} />
+                                <Input
+                                    className="mt-1"
+                                    placeholder="***************"
+                                    type="password"
+                                    name="confirmPassword"
+                                    onChange={onChangeAccDetails}
+                                    value={accDetails.confirmPassword}
+                                />
                             </Label>
 
                             <Label className="mt-6" check>
-                                <Input type="checkbox" value={tick} onClick={() => {
-                                    console.log(tick)
-                                    setTick(!tick)
-                                }} />
+                                <Input
+                                    type="checkbox"
+                                    value={tick}
+                                    onClick={() => {
+                                        console.log(tick);
+                                        setTick(!tick);
+                                    }}
+                                />
                                 <span className="ml-2">
-                                    I agree to the <span className="underline">privacy policy</span>
+                                    I agree to the{' '}
+                                    <span className="underline">
+                                        privacy policy
+                                    </span>
                                 </span>
                             </Label>
 
@@ -89,7 +138,10 @@ function CreateAccount() {
                             <hr className="my-8" />
 
                             <Button block layout="outline">
-                                <GoogleIcon className="w-4 h-4 mr-2" aria-hidden="true" />
+                                <GoogleIcon
+                                    className="w-4 h-4 mr-2"
+                                    aria-hidden="true"
+                                />
                                 Google
                             </Button>
 
@@ -106,7 +158,7 @@ function CreateAccount() {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default CreateAccount
+export default CreateAccount;
