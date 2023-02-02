@@ -25,6 +25,10 @@ const tradeSchema = new Schema({
         type: String,
         default: 'Pending',
     },
+    feedback: {
+        type: Schema.Types.ObjectId,
+        ref: 'Feeback',
+    },
 });
 
 const Trade = model('Trade', tradeSchema);

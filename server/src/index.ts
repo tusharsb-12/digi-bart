@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import express, { json, urlencoded } from 'express';
 import { DB_URI, PORT } from './config/constants';
 import { connect, set } from 'mongoose';
-import { productRoutes, tradeRoutes, userRoutes } from './api';
+import { feedbackRoutes, productRoutes, tradeRoutes, userRoutes } from './api';
 
 dotenv.config();
 
@@ -23,6 +23,7 @@ const main = async () => {
         app.use('/api/user', userRoutes);
         app.use('/api/product', productRoutes);
         app.use('/api/trade', tradeRoutes);
+        app.use('/api/feedback', feedbackRoutes);
 
         app.listen(PORT, () => {
             console.log(`Listening to port: ${PORT}`);
