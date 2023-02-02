@@ -14,7 +14,7 @@ import { ReactComponent as GithubIcon } from './github.svg'
 import { ReactComponent as TwitterIcon } from './twitter.svg'
 import { ReactComponent as MailIcon } from './mail.svg'
 import { ReactComponent as CartIcon } from './cart.svg'
-import { ReactComponent as ChatIcon } from './chat.svg'
+// import { ReactComponent as ChatIcon } from './chat.svg'
 import { ReactComponent as MoneyIcon } from './money.svg'
 import { ReactComponent as PeopleIcon } from './people.svg'
 import { ReactComponent as SearchIcon } from './search.svg'
@@ -38,8 +38,13 @@ import { ReactComponent as AccountWhiteIcon } from './account_white.svg'
 import { ReactComponent as DownArrowIcon } from './external_link.svg'
 import { ReactComponent as PlusBlackIcon } from './add_black.svg'
 import { ReactComponent as PlusWhiteIcon } from './add_white.svg'
+import { ReactComponent as ChatIcon } from './chat_white_24dp.svg'
+import { ReactComponent as CloseIcon } from './close_white_24dp.svg'
+import { ReactComponent as DoneIcon } from './done_white_24dp.svg'
 
 export {
+    CloseIcon,
+    DoneIcon,
     PlusBlackIcon,
     PlusWhiteIcon,
     DownArrowIcon,
