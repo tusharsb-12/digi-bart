@@ -1,57 +1,80 @@
-import React, { useRef, useEffect, useState, Fragment } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
-import { Scrollbars } from 'react-custom-scrollbars'
-import SectionTitle from '../../components/typography/SectionTitle'
-import { getProducts } from '../../api/product'
-import { getUserData } from '../../api/user'
-import ProductCard from '../../components/product/ProductCard2'
+import React, { useRef, useEffect, useState, Fragment } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
+import { Scrollbars } from 'react-custom-scrollbars';
+import SectionTitle from '../../components/typography/SectionTitle';
+import { getProducts, getUserProducts } from '../../api/product';
+import { getUserData } from '../../api/user';
+import ProductCard from '../../components/product/ProductCard2';
+import { useParams } from 'react-router-dom';
+import { createTrades } from '../../api/trade';
 
 export default function BarterProduct({ open, setOpen }) {
     // const [open, setOpen] = useState(true)
-    const cancelButtonRef = useRef(null)
-    const [products, setProducts] = useState([])
-    const [totalVal, setTotalVal] = useState(4000)
+    const cancelButtonRef = useRef(null);
+    const [products, setProducts] = useState([]);
+    const [totalVal, setTotalVal] = useState(4000);
     const [userData, setUserData] = useState({
-        "location": {
-            "type": "Point",
-            "coordinates": [
-                0,
-                0
-            ]
+        location: {
+            type: 'Point',
+            coordinates: [0, 0],
         },
-        "_id": "",
-        "firstName": "",
-        "lastName": "",
-        "email": "",
-        "contactNumber": "",
-        "address": "",
-        "rating": 0,
-        "value": 4000
-    })
+        _id: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+        contactNumber: '',
+        address: '',
+        rating: 0,
+        value: 4000,
+    });
+    const { id } = useParams();
+    const [selectedProduct, setSelectedProduct] = useState({
+        buy: id,
+        sell: '',
+    });
 
     useEffect(() => {
         (async () => {
-            const data = await getUserData()
+            const data = await getUserData();
             setUserData({
                 ...data.data.user,
-                address: '416, Tiranga Society, Yashwant Nagar, Goregaon West'
-            })
+                address: '416, Tiranga Society, Yashwant Nagar, Goregaon West',
+            });
             console.log(data.data.user);
-        })()
-    }, [])
+        })();
+    }, []);
     useEffect(() => {
         (async () => {
-            const data = await getProducts()
-            console.log(data.products);
-            setProducts(data.products)
-        })()
-    }, [userData])
+            if (userData._id) {
+                const data = await getUserProducts(userData._id);
+                console.log(data.products);
+                setProducts(data.products);
+            }
+        })();
+    }, [userData]);
 
+    const barterProduct = async () => {
+        console.log(selectedProduct);
+        const res = await createTrades(selectedProduct);
+        console.log(res.data);
+    };
+
+    const onSelect = (id) => {
+        setSelectedProduct({
+            ...selectedProduct,
+            sell: id,
+        });
+    };
 
     return (
         <Transition.Root show={open} as={Fragment}>
-            <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
+            <Dialog
+                as="div"
+                className="relative z-10"
+                initialFocus={cancelButtonRef}
+                onClose={setOpen}
+            >
                 <Transition.Child
                     as={Fragment}
                     enter="ease-out duration-300"
@@ -78,35 +101,67 @@ export default function BarterProduct({ open, setOpen }) {
                             {/* <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"> */}
                             <Dialog.Panel className="z-10 relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 w-[80vw] h-[80vh]">
                                 <Scrollbars>
-                                    <div className='m-2 p-2' >
-                                        <SectionTitle>Select Your Products</SectionTitle>
+                                    <div className="m-2 p-2">
+                                        <SectionTitle>
+                                            Select Your Products
+                                        </SectionTitle>
                                     </div>
 
                                     <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 my-2 mx-8">
                                         <div className="lg:col-span-3">
-                                            <div className='grid grid-cols-2 md:grid-cols-3 gap-8'>
-                                                {products.map((product, idx) => {
-                                                    return <div className='border border-8 border-green-500 rounded-lg p-4' >
-                                                        <ProductCard key={idx} product={product} user={userData} link_flag={false} />
-                                                        <div className="flex items-start mt-4">
-                                                            <div className="flex h-5 items-center mt-2">
-                                                                <input
-                                                                    id="offers"
-                                                                    name="offers"
-                                                                    type="checkbox"
-                                                                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                            <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+                                                {products.map(
+                                                    (product, idx) => {
+                                                        return (
+                                                            <div className="border border-8 border-green-500 rounded-lg p-4">
+                                                                <ProductCard
+                                                                    key={idx}
+                                                                    product={
+                                                                        product
+                                                                    }
+                                                                    user={
+                                                                        userData
+                                                                    }
+                                                                    link_flag={
+                                                                        false
+                                                                    }
                                                                 />
+                                                                <div className="flex items-start mt-4">
+                                                                    <div className="flex h-5 items-center mt-2">
+                                                                        <input
+                                                                            id="offers"
+                                                                            name="offers"
+                                                                            type="checkbox"
+                                                                            className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                                            onClick={() =>
+                                                                                onSelect(
+                                                                                    product._id
+                                                                                )
+                                                                            }
+                                                                            checked={
+                                                                                product._id ===
+                                                                                selectedProduct.sell
+                                                                            }
+                                                                        />
+                                                                    </div>
+                                                                    <div className="ml-3 text-sm">
+                                                                        <label
+                                                                            htmlFor="offers"
+                                                                            className="font-medium text-gray-700"
+                                                                        >
+                                                                            Select
+                                                                        </label>
+                                                                        <p className="text-gray-500">
+                                                                            Select
+                                                                            to
+                                                                            barter
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <div className="ml-3 text-sm">
-                                                                <label htmlFor="offers" className="font-medium text-gray-700">
-                                                                    Select
-                                                                </label>
-                                                                <p className="text-gray-500">Select to barter</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                })}
-
+                                                        );
+                                                    }
+                                                )}
                                             </div>
                                         </div>
                                     </div>
@@ -114,7 +169,10 @@ export default function BarterProduct({ open, setOpen }) {
                                         <button
                                             type="button"
                                             className="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-                                            onClick={() => setOpen(false)}
+                                            onClick={async () => {
+                                                await barterProduct();
+                                                setOpen(false);
+                                            }}
                                         >
                                             Submit : {totalVal}
                                         </button>
@@ -128,12 +186,11 @@ export default function BarterProduct({ open, setOpen }) {
                                         </button>
                                     </div>
                                 </Scrollbars>
-
                             </Dialog.Panel>
                         </Transition.Child>
                     </div>
                 </div>
             </Dialog>
         </Transition.Root>
-    )
+    );
 }

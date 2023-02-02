@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 import Layout from '../../components/Layout';
-import { StarIcon } from '@heroicons/react/20/solid'
-import OfferProducts from './OfferProducts'
+import { StarIcon } from '@heroicons/react/20/solid';
+import OfferProducts from './OfferProducts';
 import BarterProduct from './BarterProduct';
 import { getProductById } from '../../api/product';
 import { RadioGroup } from '@headlessui/react';
-
 
 const product = {
     name: 'Basic Tee 6-Pack',
@@ -66,7 +65,7 @@ export default function Product() {
         images: [],
     });
     const { id } = useParams();
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         (async () => {
@@ -258,13 +257,11 @@ export default function Product() {
                                 </div>
                             </div>
 
-
-
                             <button
                                 // type="submit"
                                 className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                 onClick={() => {
-                                    setOpen(true)
+                                    setOpen(true);
                                 }}
                             >
                                 Barter Product

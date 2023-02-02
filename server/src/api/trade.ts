@@ -12,6 +12,6 @@ const router = Router();
 router.post('/create-trade', createTrade);
 router.get('/my-trades', authenticate, userTrades);
 router.get('/my-offers', authenticate, userOffers);
-router.get('/barter-offer/:id', barterOffer);
+router.post('/barter-offer/:id', barterOffer);
 
 export default router;

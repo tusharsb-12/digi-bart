@@ -1,8 +1,8 @@
 import API from './index';
 
-export const createTrades = async () => {
-    const data = await API.get('/trade/create-trade');
-    return data.data;
+export const createTrades = async (data) => {
+    const result = await API.post('/trade/create-trade', data);
+    return result.data;
 };
 
 export const myTrades = async () => {
@@ -16,6 +16,6 @@ export const myOffers = async () => {
 };
 
 export const getBarterOffers = async (id) => {
-    const data = await API.get(`/trade/barter-offer/${id}`);
-    return data.data;
+    const result = await API.get(`/trade/barter-offer/${id}`);
+    return result.data;
 };
