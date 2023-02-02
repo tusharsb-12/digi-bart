@@ -8,6 +8,7 @@ import UserProfile from './pages/user/UserProfile';
 import UserProducts from './pages/user/UserProducts';
 import UserOffers from './pages/user/UserOffers';
 import UserSettings from './pages/user/UserSettings';
+import Product from './pages/product/Product';
 import Products from './pages/product/Products2';
 import AddProduct from './pages/product/AddProduct';
 import Home from './pages/Home';
@@ -25,7 +26,8 @@ function App() {
                 <Route path="/user/product/add" element={<AddProduct />} />
                 <Route path="/user/offer" element={<UserOffers />} />
                 <Route path="/user/setting" element={<UserSettings />} />
-                <Route path="/products" element={<Products />} />
+                <Route path='/product/:id' element={<Product />} />
+                <Route path='/products' element={<Products />} />
             </Routes>
         </Router>
     );
