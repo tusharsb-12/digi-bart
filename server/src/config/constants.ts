@@ -14,3 +14,6 @@ export const JWT_SECRET = process.env.JWT_SECRET;
 export const CD_NAME = process.env.CD_NAME;
 export const CD_API_KEY = process.env.CD_API_KEY;
 export const CD_API_SECRET = process.env.CD_API_SECRET;
+
+// ArcGIS
+export const ARCGIS_API_KEY = process.env.ARCGIS_API_KEY;

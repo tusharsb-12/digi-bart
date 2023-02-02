@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { PostProductDto } from '../dto';
 import { Product } from '../models';
 import uploadToCloudinary from '../utils/uploadToCloudinary';
+import { ResponseStatus } from '../enum';
 
 // Post a product in the market place
 export const postProduct = async (req: Request, res: Response) => {
@@ -17,16 +18,54 @@ export const postProduct = async (req: Request, res: Response) => {
                 images.push(result.url);
             }
         }
-        console.log(images);
         await Product.create({ ...input, images });
         return res.status(201).json({
-            status: 'SUCCESS',
+            status: ResponseStatus.SUCCESS,
             message: 'Product posted',
         });
     } catch (error) {
         console.log(error);
         return res.status(500).json({
-            status: 'FAIL',
+            status: ResponseStatus.FAIL,
+            errors: ['Internal server error'],
+        });
+    }
+};
+
+// Get all products by category
+export const getCategoryProducts = async (req: Request, res: Response) => {
+    try {
+        const category = req.params.category;
+        const products = await Product.find({ category });
+        return res.status(200).json({
+            status: ResponseStatus.SUCCESS,
+            message: 'Products fetched',
+            products,
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            status: ResponseStatus.FAIL,
+            errors: ['Internal server error'],
+        });
+    }
+};
+
+// Get all products
+export const getAllProducts = async (_req: Request, res: Response) => {
+    try {
+        const products = await Product.find({}, [], {
+            sort: { postedOn: -1 },
+        }).limit(15);
+        return res.status(200).json({
+            status: ResponseStatus.SUCCESS,
+            message: 'Products fetched',
+            products,
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            status: ResponseStatus.FAIL,
             errors: ['Internal server error'],
         });
     }
