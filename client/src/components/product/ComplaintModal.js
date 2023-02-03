@@ -2,9 +2,40 @@ import { Fragment, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 import StarRating from '../util/StarRating'
+import { createFeedback } from '../../api/feedback';
 
-export default function ComplaintModal({ open, setOpen }) {
+export default function ComplaintModal({ open,
+    setOpen,
+    trade,
+    buyUser,
+    sellUser, }) {
     const cancelButtonRef = useRef(null)
+    const [feedback, setFeedback] = useState({
+        review: '',
+        trade,
+        buyUser,
+        sellUser,
+    });
+    const [rating, setRating] = useState(0);
+    const [hover, setHover] = useState(0);
+
+    const onChange = (e) => {
+        setFeedback({
+            ...feedback,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const onSubmit = async () => {
+        console.log(feedback);
+        await createFeedback({
+            review: feedback.review,
+            trade: feedback.trade,
+            buyerId: feedback.buyUser,
+            sellerId: feedback.sellUser,
+            rating,
+        });
+    };
 
     return (
         <Transition.Root show={open} as={Fragment}>
@@ -52,7 +83,12 @@ export default function ComplaintModal({ open, setOpen }) {
                                                                 rows={3}
                                                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                                 placeholder="you@example.com"
-                                                                defaultValue={''}
+                                                                defaultValue={
+                                                                    feedback.review
+                                                                }
+                                                                onChange={
+                                                                    onChange
+                                                                }
                                                             />
                                                         </div>
                                                         <p className="mt-2 text-sm text-gray-500">
@@ -71,7 +107,11 @@ export default function ComplaintModal({ open, setOpen }) {
                                     <button
                                         type="button"
                                         className="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-                                        onClick={() => setOpen(false)}
+                                        onClick={async () => {
+                                            const res = await onSubmit();
+                                            console.log(res.data);
+                                            setOpen(false);
+                                        }}
                                     >
                                         Submit
                                     </button>
