@@ -15,6 +15,8 @@ function CreateAccount() {
         email: '',
         password: '',
         confirmPassword: '',
+        address: '',
+        contactNumber: '',
     });
     const navigate = useNavigate();
 
@@ -109,6 +111,28 @@ function CreateAccount() {
                                     name="confirmPassword"
                                     onChange={onChangeAccDetails}
                                     value={accDetails.confirmPassword}
+                                />
+                            </Label>
+
+                            <Label className="mt-4">
+                                <span>Address</span>
+                                <Input
+                                    className="mt-1 p-2"
+                                    type="text"
+                                    name="address"
+                                    onChange={onChangeAccDetails}
+                                    value={accDetails.address}
+                                />
+                            </Label>
+
+                            <Label className="mt-4">
+                                <span>Contact Number</span>
+                                <Input
+                                    className="mt-1 p-2"
+                                    type="text"
+                                    name="contactNumber"
+                                    onChange={onChangeAccDetails}
+                                    value={accDetails.contactNumber}
                                 />
                             </Label>
 

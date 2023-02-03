@@ -24,7 +24,6 @@ const UserProfile = () => {
             const data = await getUserData();
             setUserData({
                 ...data.data.user,
-                address: '416, Tiranga Society, Yashwant Nagar, Goregaon West',
             });
             console.log(data.data.user);
         })();
@@ -32,7 +31,10 @@ const UserProfile = () => {
     return (
         <UserLayout>
             <Scrollbars>
-                <PageTitle > <div className='mt-[-16px] mx-4'>Profile</div> </PageTitle>
+                <PageTitle>
+                    {' '}
+                    <div className="mt-[-16px] mx-4">Profile</div>{' '}
+                </PageTitle>
                 <div className="h-full">
                     <div className="mx-2 my-6">
                         <div className="flex flex-wrap m-2 drop-shadow-lg">

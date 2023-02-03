@@ -113,7 +113,10 @@ export default function BarterProduct({ open, setOpen }) {
                                                 {products.map(
                                                     (product, idx) => {
                                                         return (
-                                                            <div className="border border-8 border-green-500 rounded-lg p-4">
+                                                            <div
+                                                                key={idx}
+                                                                className="border border-8 border-green-500 rounded-lg p-4"
+                                                            >
                                                                 <ProductCard
                                                                     key={idx}
                                                                     product={

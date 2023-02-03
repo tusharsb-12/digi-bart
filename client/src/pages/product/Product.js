@@ -156,7 +156,10 @@ export default function Product() {
                     <div className="mx-auto mt-6 max-w-4xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
                         {result.images.map((image, index) => {
                             return (
-                                <div className="aspect-w-3 aspect-h-4 hidden overflow-hidden rounded-lg lg:block">
+                                <div
+                                    key={index}
+                                    className="aspect-w-3 aspect-h-4 hidden overflow-hidden rounded-lg lg:block"
+                                >
                                     <img
                                         src={image}
                                         alt={''}
@@ -305,9 +308,9 @@ export default function Product() {
                                         <li className="text-gray-400">
                                             {' '}
                                             <span className="text-gray-600">
-                                                {result.shippingAvailablity}{' '}
-                                                {'Available'} :{' '}
-                                                {'Not Available'}
+                                                {result.shippingAvailablity
+                                                    ? 'Shipping available'
+                                                    : 'Shipping not available'}
                                             </span>{' '}
                                         </li>
                                         <li className="text-gray-400">
