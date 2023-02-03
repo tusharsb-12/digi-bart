@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { ReportIcon } from '../../assets/icons'
 
 const ProductCard2 = ({ product, user, edit_flag = true, link_flag = true }) => {
     const { _id, name, description, images, value, category, postedOn, bougtOn, owner, condition, shippingAvailablity, upForTrade, location } = product;
@@ -18,7 +19,7 @@ const ProductCard2 = ({ product, user, edit_flag = true, link_flag = true }) => 
                     <div>
                         <h3 className="text-sm text-gray-700">
                             <span aria-hidden="true" className="absolute inset-0" />
-                            {name}
+                            <span>{name}</span>
                         </h3>
                         <p className="mt-1 text-sm text-gray-500">{description.slice(0, Math.min(description.length, 100)) + '...'}</p>
                     </div>
