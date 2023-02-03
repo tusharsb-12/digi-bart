@@ -1,14 +1,51 @@
-import { Fragment, useRef, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
-import StarRating from '../util/StarRating'
+import { Fragment, useRef, useState } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
+import StarRating from '../util/StarRating';
+import { createFeedback } from '../../api/feedback';
 
-export default function FeedbackModal({ open, setOpen }) {
-    const cancelButtonRef = useRef(null)
+export default function FeedbackModal({
+    open,
+    setOpen,
+    trade,
+    buyUser,
+    sellUser,
+}) {
+    const cancelButtonRef = useRef(null);
+    const [feedback, setFeedback] = useState({
+        review: '',
+        trade,
+        buyUser,
+        sellUser,
+    });
+    const [rating, setRating] = useState(0);
+    const [hover, setHover] = useState(0);
+
+    const onChange = (e) => {
+        setFeedback({
+            ...feedback,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const onSubmit = async () => {
+        await createFeedback({
+            review: feedback.review,
+            trade: feedback.trade,
+            buyerId: feedback.buyUser,
+            sellerId: feedback.sellUser,
+            rating,
+        });
+    };
 
     return (
         <Transition.Root show={open} as={Fragment}>
-            <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
+            <Dialog
+                as="div"
+                className="relative z-10"
+                initialFocus={cancelButtonRef}
+                onClose={setOpen}
+            >
                 <Transition.Child
                     as={Fragment}
                     enter="ease-out duration-300"
@@ -36,7 +73,10 @@ export default function FeedbackModal({ open, setOpen }) {
                                 <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                     <div className="sm:flex sm:items-start">
                                         <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                            <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
+                                            <Dialog.Title
+                                                as="h3"
+                                                className="text-lg font-medium leading-6 text-gray-900"
+                                            >
                                                 Feedback
                                             </Dialog.Title>
                                             <div className="mt-2">
@@ -48,19 +88,70 @@ export default function FeedbackModal({ open, setOpen }) {
                                                         <div className="mt-1">
                                                             <textarea
                                                                 id="feedback"
-                                                                name="feedback"
+                                                                name="review"
                                                                 rows={3}
                                                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                                                placeholder="you@example.com"
-                                                                defaultValue={''}
+                                                                placeholder="Your review here"
+                                                                defaultValue={
+                                                                    feedback.review
+                                                                }
+                                                                onChange={
+                                                                    onChange
+                                                                }
                                                             />
                                                         </div>
                                                         <p className="mt-2 text-sm text-gray-500">
-                                                            Brief Feedback for your trade. Upto 500 letters supported
+                                                            Brief Feedback for
+                                                            your trade. Upto 500
+                                                            letters supported
                                                         </p>
                                                     </div>
-                                                    <div className='scale-[150%] flex flex-wrap justify-center'>
-                                                        <StarRating />
+                                                    <div className="scale-[150%] flex flex-wrap justify-center">
+                                                        <div className="star-rating">
+                                                            {[...Array(5)].map(
+                                                                (
+                                                                    star,
+                                                                    index
+                                                                ) => {
+                                                                    index += 1;
+                                                                    return (
+                                                                        <button
+                                                                            type="button"
+                                                                            key={
+                                                                                index
+                                                                            }
+                                                                            className={
+                                                                                index <=
+                                                                                ((rating &&
+                                                                                    hover) ||
+                                                                                    hover)
+                                                                                    ? 'on'
+                                                                                    : 'off'
+                                                                            }
+                                                                            onClick={() =>
+                                                                                setRating(
+                                                                                    index
+                                                                                )
+                                                                            }
+                                                                            onMouseEnter={() =>
+                                                                                setHover(
+                                                                                    index
+                                                                                )
+                                                                            }
+                                                                            onMouseLeave={() =>
+                                                                                setHover(
+                                                                                    rating
+                                                                                )
+                                                                            }
+                                                                        >
+                                                                            <span className="star">
+                                                                                &#9733;
+                                                                            </span>
+                                                                        </button>
+                                                                    );
+                                                                }
+                                                            )}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -71,7 +162,11 @@ export default function FeedbackModal({ open, setOpen }) {
                                     <button
                                         type="button"
                                         className="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-                                        onClick={() => setOpen(false)}
+                                        onClick={async () => {
+                                            const res = await onSubmit();
+                                            console.log(res.data);
+                                            setOpen(false);
+                                        }}
                                     >
                                         Submit
                                     </button>
@@ -87,8 +182,8 @@ export default function FeedbackModal({ open, setOpen }) {
                             </Dialog.Panel>
                         </Transition.Child>
                     </div>
-                </div >
-            </Dialog >
-        </Transition.Root >
-    )
+                </div>
+            </Dialog>
+        </Transition.Root>
+    );
 }

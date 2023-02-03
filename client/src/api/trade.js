@@ -21,11 +21,11 @@ export const getBarterOffers = async (id) => {
 };
 
 export const acceptTrade = async (id) => {
-    const result = await API.post(`/accept-trade/${id}`);
+    const result = await API.post(`/trade/accept-trade/${id}`);
     return result.data;
 };
 
 export const rejectTrade = async (id) => {
-    const result = await API.post(`/reject-trade/${id}`);
+    const result = await API.post(`/trade/reject-trade/${id}`);
     return result.data;
 };
