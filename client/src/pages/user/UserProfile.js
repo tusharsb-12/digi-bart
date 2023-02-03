@@ -4,7 +4,7 @@ import ProductTable from '../../components/util/ProductTable';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { getUserData } from '../../api/user';
 import Map from '../../components/Map';
-
+import PageTitle from '../../components/typography/PageTitle';
 const UserProfile = () => {
     const [userData, setUserData] = useState({
         location: {
@@ -32,9 +32,10 @@ const UserProfile = () => {
     return (
         <UserLayout>
             <Scrollbars>
+                <PageTitle > <div className='mt-[-16px] mx-4'>Profile</div> </PageTitle>
                 <div className="h-full">
                     <div className="mx-2 my-6">
-                        <div className="flex flex-wrap m-2">
+                        <div className="flex flex-wrap m-2 drop-shadow-lg">
                             <div className="aspect-square w-40 h-40 rounded-full">
                                 <img
                                     className="aspect-square w-40 object-cover rounded-full"
@@ -46,10 +47,10 @@ const UserProfile = () => {
                             </div>
                             <div className="my-auto ml-8 flex-1">
                                 <div className="flex flex-wrap">
-                                    <div className="mx-2">
+                                    <div className="ml-2 mr-1">
                                         {userData.firstName}
                                     </div>
-                                    <div className="mx-2">
+                                    <div className="mr-2">
                                         {userData.lastName}
                                     </div>
                                 </div>
@@ -59,11 +60,10 @@ const UserProfile = () => {
                                 </div>
                                 <div className="m-2">{userData.address}</div>
                             </div>
-                            <div className="aspect-[9/5] w-72 bg-white rounded-lg">
-                                Map
-                                {/* <Map position={[51.505, -0.09]} /> */}
-                            </div>
                         </div>
+                        {/* <div className="aspect-[9/5] w-full bg-white rounded-lg object-contain">
+                            <Map className='object-contain' position={[51.505, -0.09]} />
+                        </div> */}
                     </div>
                     {/* <Scrollbars > */}
                     <div className="m-2">
