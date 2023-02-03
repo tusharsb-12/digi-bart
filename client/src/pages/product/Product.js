@@ -6,7 +6,8 @@ import OfferProducts from './OfferProducts';
 import BarterProduct from './BarterProduct';
 import { getProductById } from '../../api/product';
 import { RadioGroup } from '@headlessui/react';
-
+import { ReportIcon } from '../../assets/icons';
+import ComplaintModal from '../../components/product/ComplaintModal'
 const product = {
     name: 'Basic Tee 6-Pack',
     price: '$192',
@@ -66,6 +67,7 @@ export default function Product() {
     });
     const { id } = useParams();
     const [open, setOpen] = useState(false);
+    const [open2, setOpen2] = useState(false);
 
     useEffect(() => {
         (async () => {
@@ -78,6 +80,7 @@ export default function Product() {
     return (
         <Layout>
             <BarterProduct open={open} setOpen={setOpen} />
+            <ComplaintModal open={open2} setOpen={setOpen2} />
             <div className="bg-white">
                 <div className="pt-6">
                     <nav aria-label="Breadcrumb">
@@ -172,12 +175,15 @@ export default function Product() {
 
                     {/* Product info */}
                     <div className=" mx-auto max-w-4xl px-4 pt-10 pb-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pt-16 lg:pb-24">
-                        <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-                            <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+                        <div className="flex lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
+                            <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl mr-2">
                                 {result.name}
                             </h1>
-                        </div>
+                            <button onClick={() => {
+                                setOpen2(true)
+                            }}> <span className='flex text-black'><ReportIcon /> <span className='mx-1' >Report</span> </span></button>
 
+                        </div>
                         {/* Options */}
                         <div className="mt-4 lg:row-span-3 lg:mt-0">
                             <h2 className="sr-only">Product information</h2>

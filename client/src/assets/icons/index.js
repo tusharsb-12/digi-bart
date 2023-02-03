@@ -41,8 +41,10 @@ import { ReactComponent as PlusWhiteIcon } from './add_white.svg'
 import { ReactComponent as ChatIcon } from './chat_white_24dp.svg'
 import { ReactComponent as CloseIcon } from './close_white_24dp.svg'
 import { ReactComponent as DoneIcon } from './done_white_24dp.svg'
+import { ReactComponent as ReportIcon } from './report_black_24dp.svg'
 
 export {
+    ReportIcon,
     CloseIcon,
     DoneIcon,
     PlusBlackIcon,
