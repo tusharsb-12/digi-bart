@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
     SearchIcon,
     MoonIcon,
@@ -8,33 +8,43 @@ import {
     OutlinePersonIcon,
     OutlineCogIcon,
     OutlineLogoutIcon,
-} from '../assets/icons'
-import { Avatar, Badge, Input, Dropdown, DropdownItem, WindmillContext } from '@windmill/react-ui'
+} from '../assets/icons';
+import {
+    Avatar,
+    Badge,
+    Input,
+    Dropdown,
+    DropdownItem,
+    WindmillContext,
+} from '@windmill/react-ui';
 
 function Header() {
-    const { mode, toggleMode } = useContext(WindmillContext)
+    const { mode, toggleMode } = useContext(WindmillContext);
 
-    const [isNotificationsMenuOpen, setIsNotificationsMenuOpen] = useState(false)
-    const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false)
+    const [isNotificationsMenuOpen, setIsNotificationsMenuOpen] =
+        useState(false);
+    const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
 
     function handleNotificationsClick() {
-        setIsNotificationsMenuOpen(!isNotificationsMenuOpen)
+        setIsNotificationsMenuOpen(!isNotificationsMenuOpen);
     }
 
     function handleProfileClick() {
-        setIsProfileMenuOpen(!isProfileMenuOpen)
+        setIsProfileMenuOpen(!isProfileMenuOpen);
     }
 
     return (
         <header className="z-40 py-4 bg-white shadow-bottom dark:bg-gray-800">
             <div className="container flex items-center justify-between h-full px-6 mx-auto text-purple-600 dark:text-purple-300">
-
                 {/* <!-- Search input --> */}
 
                 <div className="relative w-full max-w-xl mr-6 focus-within:text-purple-500">
                     <div className="flex justify-left flex-1 lg:mr-32">
-                        <Link className="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200 mr-8" to="/">
-                            DIGI BARTER
+                        <Link
+                            className="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200 mr-8"
+                            to="/"
+                        >
+                            GOOD SWAP
                         </Link>
                         {/* <div className="absolute inset-y-0 flex items-center pl-2">
                             <SearchIcon className="w-4 h-4" aria-hidden="true" />
@@ -44,8 +54,12 @@ function Header() {
                             placeholder="Search for projects"
                             aria-label="Search"
                         /> */}
-                        <Link className='mx-3' to='/explore'>Explore</Link>
-                        <Link className='mx-3' to='/products'>Products</Link>
+                        <Link className="mx-3" to="/explore">
+                            Explore
+                        </Link>
+                        <Link className="mx-3" to="/products">
+                            Products
+                        </Link>
                     </div>
                 </div>
                 <ul className="flex items-center flex-shrink-0 space-x-6">
@@ -117,16 +131,25 @@ function Header() {
                             isOpen={isProfileMenuOpen}
                             onClose={() => setIsProfileMenuOpen(false)}
                         >
-                            <DropdownItem >
-                                <OutlinePersonIcon className="w-4 h-4 mr-3" aria-hidden="true" />
-                                <Link to='/user'>Profile</Link>
+                            <DropdownItem>
+                                <OutlinePersonIcon
+                                    className="w-4 h-4 mr-3"
+                                    aria-hidden="true"
+                                />
+                                <Link to="/user">Profile</Link>
                             </DropdownItem>
-                            <DropdownItem >
-                                <OutlineCogIcon className="w-4 h-4 mr-3" aria-hidden="true" />
-                                <Link to='/user/setting'>Settings</Link>
+                            <DropdownItem>
+                                <OutlineCogIcon
+                                    className="w-4 h-4 mr-3"
+                                    aria-hidden="true"
+                                />
+                                <Link to="/user/setting">Settings</Link>
                             </DropdownItem>
                             <DropdownItem onClick={() => alert('Log out!')}>
-                                <OutlineLogoutIcon className="w-4 h-4 mr-3" aria-hidden="true" />
+                                <OutlineLogoutIcon
+                                    className="w-4 h-4 mr-3"
+                                    aria-hidden="true"
+                                />
                                 <span>Log out</span>
                             </DropdownItem>
                         </Dropdown>
@@ -134,7 +157,7 @@ function Header() {
                 </ul>
             </div>
         </header>
-    )
+    );
 }
 
-export default Header
+export default Header;

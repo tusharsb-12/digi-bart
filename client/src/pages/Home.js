@@ -3,7 +3,7 @@ import Layout from '../components/Layout';
 
 const Home = () => {
     return (
-        <div className='overflow-y-hidden' >
+        <div className="overflow-y-hidden">
             <Layout>
                 <div className="relative top-[120px] bg-white dark:bg-gray-900 h-fit">
                     <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
@@ -16,7 +16,7 @@ const Home = () => {
                                 New
                             </span>{' '}
                             <span className="text-sm font-medium">
-                                Digi Barter is out! See what's new
+                                Good Swap is out! See what's new
                             </span>
                             <svg
                                 className="ml-2 w-5 h-5"
@@ -32,7 +32,7 @@ const Home = () => {
                             </svg>
                         </a>
                         <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-                            DIGI BARTER
+                            GOOD SWAP
                         </h1>
                         <p className="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
                             Digitalizing the age old barter system
@@ -75,7 +75,6 @@ const Home = () => {
                 </div>
             </Layout>
         </div>
-
     );
 };
 

@@ -55,10 +55,13 @@ const UserProfile = () => {
                                     <div className="mr-1">
                                         {userData.lastName}
                                     </div>
-
                                 </div>
                                 <div className="m-2">
-                                    <span>4.75 <span className="star">&#9733;</span> Rated</span>
+                                    <span>
+                                        {4.5}{' '}
+                                        <span className="star">&#9733;</span>{' '}
+                                        Rated
+                                    </span>
                                 </div>
                                 <div className="m-2">{userData.email}</div>
                                 <div className="m-2">
