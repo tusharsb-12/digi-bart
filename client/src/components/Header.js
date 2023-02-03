@@ -28,20 +28,24 @@ function Header() {
     return (
         <header className="z-40 py-4 bg-white shadow-bottom dark:bg-gray-800">
             <div className="container flex items-center justify-between h-full px-6 mx-auto text-purple-600 dark:text-purple-300">
-                <Link className="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" to="/">
-                    BARTER
-                </Link>
+
                 {/* <!-- Search input --> */}
-                <div className="flex justify-center flex-1 lg:mr-32">
-                    <div className="relative w-full max-w-xl mr-6 focus-within:text-purple-500">
-                        <div className="absolute inset-y-0 flex items-center pl-2">
+
+                <div className="relative w-full max-w-xl mr-6 focus-within:text-purple-500">
+                    <div className="flex justify-left flex-1 lg:mr-32">
+                        <Link className="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200 mr-8" to="/">
+                            DIGI BARTER
+                        </Link>
+                        {/* <div className="absolute inset-y-0 flex items-center pl-2">
                             <SearchIcon className="w-4 h-4" aria-hidden="true" />
                         </div>
                         <Input
                             className="pl-8 h-[2rem] text-gray-700"
                             placeholder="Search for projects"
                             aria-label="Search"
-                        />
+                        /> */}
+                        <Link className='mx-3' to='/explore'>Explore</Link>
+                        <Link className='mx-3' to='/products'>Products</Link>
                     </div>
                 </div>
                 <ul className="flex items-center flex-shrink-0 space-x-6">
@@ -80,11 +84,11 @@ function Header() {
                             isOpen={isNotificationsMenuOpen}
                             onClose={() => setIsNotificationsMenuOpen(false)}
                         >
-                            <DropdownItem tag="a" href="#" className="justify-between">
+                            <DropdownItem className="justify-between">
                                 <span>Messages</span>
                                 <Badge type="danger">13</Badge>
                             </DropdownItem>
-                            <DropdownItem tag="a" href="#" className="justify-between">
+                            <DropdownItem className="justify-between">
                                 <span>Sales</span>
                                 <Badge type="danger">2</Badge>
                             </DropdownItem>
@@ -113,13 +117,13 @@ function Header() {
                             isOpen={isProfileMenuOpen}
                             onClose={() => setIsProfileMenuOpen(false)}
                         >
-                            <DropdownItem tag="a" href="#">
+                            <DropdownItem >
                                 <OutlinePersonIcon className="w-4 h-4 mr-3" aria-hidden="true" />
-                                <span>Profile</span>
+                                <Link to='/user'>Profile</Link>
                             </DropdownItem>
-                            <DropdownItem tag="a" href="#">
+                            <DropdownItem >
                                 <OutlineCogIcon className="w-4 h-4 mr-3" aria-hidden="true" />
-                                <span>Settings</span>
+                                <Link to='/user/setting'>Settings</Link>
                             </DropdownItem>
                             <DropdownItem onClick={() => alert('Log out!')}>
                                 <OutlineLogoutIcon className="w-4 h-4 mr-3" aria-hidden="true" />
