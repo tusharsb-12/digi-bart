@@ -19,3 +19,13 @@ export const getBarterOffers = async (id) => {
     const result = await API.get(`/trade/barter-offer/${id}`);
     return result.data;
 };
+
+export const acceptTrade = async (id) => {
+    const result = await API.post(`/accept-trade/${id}`);
+    return result.data;
+};
+
+export const rejectTrade = async (id) => {
+    const result = await API.post(`/reject-trade/${id}`);
+    return result.data;
+};
