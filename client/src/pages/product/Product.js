@@ -8,6 +8,8 @@ import { getProductById } from '../../api/product';
 import { RadioGroup } from '@headlessui/react';
 import { ReportIcon } from '../../assets/icons';
 import ComplaintModal from '../../components/product/ComplaintModal'
+import { getUserData } from '../../api/user';
+
 const product = {
     name: 'Basic Tee 6-Pack',
     price: '$192',
@@ -52,10 +54,25 @@ function classNames(...classes) {
 }
 
 export default function Product() {
+    const [userData, setUserData] = useState({
+        location: {
+            type: 'Point',
+            coordinates: [0, 0],
+        },
+        _id: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+        contactNumber: '',
+        address: '',
+        rating: 0,
+    });
+
     const [result, setProduct] = useState({
         name: '',
         description: '',
         owner: {
+            _id: '',
             firstName: '',
             lastName: '',
             rating: 0,
@@ -65,11 +82,16 @@ export default function Product() {
         shippingAvailablity: false,
         images: [],
     });
-    const { id } = useParams();
-    const [open, setOpen] = useState(false);
-    const [open2, setOpen2] = useState(false);
 
     useEffect(() => {
+        (async () => {
+            const data = await getUserData();
+            setUserData({
+                ...data.data.user,
+            });
+            console.log(data.data.user);
+        })();
+
         (async () => {
             const data = await getProductById(id);
             console.log(data);
@@ -77,10 +99,16 @@ export default function Product() {
         })();
     }, []);
 
+    const { id } = useParams();
+    const [open, setOpen] = useState(false);
+    const [open2, setOpen2] = useState(false);
+
     return (
         <Layout>
             <BarterProduct open={open} setOpen={setOpen} />
-            <ComplaintModal open={open2} setOpen={setOpen2} />
+            <ComplaintModal open={open2} setOpen={setOpen2} trade={product._id}
+                buyUser={product.owner}
+                sellUser={product.owner} />
             <div className="bg-white">
                 <div className="pt-6">
                     <nav aria-label="Breadcrumb">
