@@ -37,7 +37,9 @@ export const userTrades = async (req: Request, res: Response) => {
     try {
         // @ts-ignore
         const id = req.user.id;
-        const trades = await Trade.find({ sellUser: id, active: true })
+        const trades = await Trade.find({
+            $and: [{ buyUser: id }, { $eq: { tradeStatus: 'Pending' } }],
+        })
             .populate('sell')
             .populate('buy');
         return res.status(201).json({
@@ -59,7 +61,9 @@ export const userOffers = async (req: Request, res: Response) => {
     try {
         // @ts-ignore
         const id = req.user.id;
-        const trades = await Trade.find({ buyUser: id, active: true })
+        const trades = await Trade.find({
+            $and: [{ sellUser: id }, { tradeStatus: 'Pending' }],
+        })
             .populate('sell')
             .populate('buy');
         return res.status(201).json({

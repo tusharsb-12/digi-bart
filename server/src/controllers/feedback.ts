@@ -2,13 +2,23 @@ import { Request, Response } from 'express';
 import { FeedbackDto } from '../dto';
 import { ResponseStatus } from '../enum';
 import Feedback from '../models/Feedback';
-import { Trade } from '../models';
+import { Trade, User } from '../models';
 
 // Create feedback
 export const createFeedback = async (req: Request, res: Response) => {
     try {
         const input: FeedbackDto = req.body;
-        await Feedback.create(input);
+        const feedback = await Feedback.create(input);
+        const user = await User.findById(feedback.sellerId);
+        let rating = user?.rating;
+        let len = await Feedback.find({ sellerId: feedback.sellerId }).count();
+
+        User.findByIdAndUpdate(feedback.sellerId, {
+            $set: {
+                // @ts-ignore
+                rating: ((rating! + feedback.rating) * len) / (len + 1),
+            },
+        });
 
         return res.status(200).json({
             status: ResponseStatus.SUCCESS,

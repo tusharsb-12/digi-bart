@@ -10,7 +10,15 @@ import { geocoder } from '../utils';
 export const createUser = async (req: Request, res: Response) => {
     try {
         const input: CreateUserDto = req.body;
-        await User.create(input);
+        const result = await geocoder.findAddressCandidates(input.address);
+        const loc = result.candidates[0].location;
+        await User.create({
+            ...input,
+            location: {
+                type: 'Point',
+                coordinates: [loc.x, loc.y],
+            },
+        });
         return res.status(201).json({
             status: ResponseStatus.SUCCESS,
             message: 'Account created',
