@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { getBarterOffers } from '../../api/trade';
 import { ChatIcon, CloseIcon, DoneIcon } from '../../assets/icons';
 import { useParams } from 'react-router-dom';
+import FeedbackModal from '../../components/product/FeedbackModal';
 
 const products = [
     [
@@ -127,6 +128,7 @@ const products = [
 ];
 
 export default function OfferProducts() {
+    const [open, setOpen] = useState(false)
     const [trades, setTrades] = useState([]);
     const { id } = useParams();
 
@@ -140,6 +142,7 @@ export default function OfferProducts() {
 
     return (
         <div className="bg-white">
+            <FeedbackModal open={open} setOpen={setOpen} />
             <div className="mx-auto max-w-4xl py-0 px-4 sm:py-0 sm:px-6 lg:max-w-7xl lg:px-8">
                 <h2 className="text-2xl font-bold tracking-tight text-gray-900">
                     Barter Offers
@@ -152,61 +155,69 @@ export default function OfferProducts() {
                         <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
                             {trades.map((product) => {
                                 return (
-                                    <div key={product.id}>
-                                        <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
-                                            <img
-                                                src={product.sell.images[0]}
-                                                alt={product.imageAlt}
-                                                className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                                            />
-                                        </div>
-                                        <div className="mt-4 flex justify-between">
-                                            <div>
-                                                <h3 className="text-sm text-gray-700">
-                                                    {/* <a href={product.href}> */}
-                                                    <span
-                                                        aria-hidden="true"
-                                                        className="absolute inset-0"
-                                                    />
-                                                    {product.sell.name}
-                                                    {/* </a> */}
-                                                </h3>
-                                                <p className="mt-1 text-sm text-gray-500">
-                                                    {product.sell.description}
+                                    <>
+                                        <div key={product.id}>
+                                            <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
+                                                <img
+                                                    src={product.sell.images[0]}
+                                                    alt={product.imageAlt}
+                                                    className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                                                />
+                                            </div>
+                                            <div className="mt-4 flex justify-between">
+                                                <div>
+                                                    <h3 className="text-sm text-gray-700">
+                                                        {/* <a href={product.href}> */}
+                                                        <span
+                                                            aria-hidden="true"
+                                                            className="absolute inset-0"
+                                                        />
+                                                        {product.sell.name}
+                                                        {/* </a> */}
+                                                    </h3>
+                                                    <p className="mt-1 text-sm text-gray-500">
+                                                        {product.sell.description}
+                                                    </p>
+                                                </div>
+                                                <p className="text-sm font-medium text-gray-900">
+                                                    {product.sell.price}
                                                 </p>
                                             </div>
-                                            <p className="text-sm font-medium text-gray-900">
-                                                {product.sell.price}
-                                            </p>
                                         </div>
                                         <div className="flex flex-wrap justify-center">
                                             <button
+                                                type="button"
+                                                className="py-2 px-4  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white  transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg m-2"
                                                 onClick={(e) => {
                                                     console.log('Close');
                                                 }}
-                                                className="py-2 px-4  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white  transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg m-2"
                                             >
                                                 <CloseIcon />
                                             </button>
                                             <button
                                                 type="button"
-                                                class="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white  transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg m-2"
+                                                className="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white  transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg m-2"
+                                                onClick={() => {
+                                                    console.log("hello")
+                                                }}
                                             >
                                                 <ChatIcon />
                                             </button>
                                             <button
-                                                onClick={() => {}}
+                                                type="button"
                                                 className="py-2 px-4  bg-green-600 hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white  transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg m-2"
+                                                onClick={() => {
+                                                    console.log("hello")
+                                                }}
                                             >
                                                 <DoneIcon />
                                             </button>
                                         </div>
-                                    </div>
+                                    </>
                                 );
                             })}
                         </div>
                     </div>
-                    {/* // ))} */}
                 </div>
             </div>
         </div>
